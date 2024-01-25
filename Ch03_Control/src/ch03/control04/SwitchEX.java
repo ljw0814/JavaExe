@@ -1,8 +1,8 @@
-package ch03.control05;
+package ch03.control04;
 
 import java.util.Scanner;
 
-public class IfElseEX {
+public class SwitchEX {
 
 	public static void main(String[] args) {
 		System.out.println("1.짜장면");
@@ -12,27 +12,12 @@ public class IfElseEX {
 		System.out.println("5.유린기");
 		System.out.println("선택 >> ");
 		
-	
+		
 		Scanner sc = new Scanner(System.in);
 		int sel= sc.nextInt();
-		
-		// if else로 바꾸기
-		
-		if(sel == 1)
-				System.out.println("짜장면이 나왔습니다");
-		else if(sel == 2)
-				System.out.println("짬뽕이 나왔습니다");
-		else if(sel == 3)
-			System.out.println("탕수육 나왔습니다");
-		else if(sel == 4)
-			System.out.println("유산슬 나왔습니다");
-		else if(sel == 5)
-			System.out.println("유린기 나왔습니다");
-		else System.out.println("해당 메뉴 번호가 없습니다.");
-		
 		//sel의 값과 같은 case로 이동하여 실행하고 
 		//break를 만나면 switch문이 종료된다.
-		/*switch(sel) {
+		switch(sel) {
 		case 1:
 			System.out.println("짜장면이 나왔습니다");
 			break;
@@ -50,10 +35,10 @@ public class IfElseEX {
 			break;
 		default:	//else와 같은 의미
 			System.out.println("해당 메뉴 번호가 없습니다.");
-			break;*/
+			break;
 		}
 
 
 	}
 
-
+}
