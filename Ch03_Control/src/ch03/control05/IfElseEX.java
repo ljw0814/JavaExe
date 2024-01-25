@@ -30,6 +30,7 @@ public class IfElseEX {
 			System.out.println("유린기 나왔습니다");
 		else System.out.println("해당 메뉴 번호가 없습니다.");
 		
+		
 		//sel의 값과 같은 case로 이동하여 실행하고 
 		//break를 만나면 switch문이 종료된다.
 		/*switch(sel) {
