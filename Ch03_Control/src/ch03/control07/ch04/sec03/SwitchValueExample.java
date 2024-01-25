@@ -1,11 +1,11 @@
-package ch04.sec03;
+package ch03.control07.ch04.sec03;
 
 public class SwitchValueExample {
 
 	public static void main(String[] args) {
 		String grade = "B";
-		
 		int score1 =0;
+		
 		switch(grade) {
 			case "A":
 				score1= 100;
@@ -17,7 +17,7 @@ public class SwitchValueExample {
 			default:
 				score1 = 60;
 			}
-		System.out.println("score1" + score1);
+		System.out.println("score1: " + score1);
 		
 		int score2 = switch(grade) {
 			case "A" -> 100;
