@@ -20,7 +20,6 @@ public class MethodEx3 {
 		int result1 = add(10, 5);// add(파라미터(인자))
 		System.out.println("결과값은 "+ result1);
 		
-		
 		int a =3, b = 7;
 		int result2 = add(a,b);
 		System.out.println("결과값은 "+ result2);

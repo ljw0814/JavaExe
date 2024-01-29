@@ -35,9 +35,9 @@ public class MethodEx2 {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		//1) 처리하기 전에 입력받는 부분
-		System.out.println("1번째 정수 입력 >> ");
+		System.out.println("첫번째 정수 입력 >> ");
 		int num0 = sc.nextInt();
-		System.out.println("2번째 정수 입력 >> ");
+		System.out.println("두번째 정수 입력 >> ");
 		int num1 = sc.nextInt();
 		System.out.println("연산자 입력(+ - * / %) >> ");
 		String op = sc.next();

@@ -1,5 +1,4 @@
 package ch06_Method01;
-
 import java.util.Scanner;
 
 public class MethodEx {
@@ -32,7 +31,7 @@ public class MethodEx {
 			result = num0 + num1;
 			break;
 		default:
-			System.out.println("연산이 불가능합니다.");
+			System.out.println("연산이 불가능합니다!");
 			break;
 		}
 		// 3) 결과값 출력

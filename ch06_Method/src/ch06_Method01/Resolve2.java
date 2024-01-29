@@ -10,8 +10,7 @@ public class Resolve2 {
 		// 절대값 계산 메소드
 		int absolute = Math.abs(a - b);
 		System.out.println(absolute);
-	}
-		
+	}	
 	
 	public static void main(String[] args) {
 		

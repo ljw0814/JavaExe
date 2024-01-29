@@ -1,5 +1,4 @@
 package ch07.enum01.ch05.sec12;
-
 import java.util.Scanner;
 
 public class SwitchEX {
@@ -11,8 +10,7 @@ public class SwitchEX {
 		System.out.println("4.유산슬");
 		System.out.println("5.유린기");
 		System.out.println("선택 >> ");
-		
-		
+			
 		Scanner sc = new Scanner(System.in);
 		int sel= sc.nextInt();
 		//sel의 값과 같은 case로 이동하여 실행하고 
@@ -36,9 +34,8 @@ public class SwitchEX {
 		default:	//else와 같은 의미
 			System.out.println("해당 메뉴 번호가 없습니다.");
 			break;
+		
 		}
-
-
 	}
 
 }

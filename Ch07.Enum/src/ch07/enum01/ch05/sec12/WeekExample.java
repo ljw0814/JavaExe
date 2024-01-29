@@ -28,8 +28,6 @@ public class WeekExample {
 
 			System.out.println("열심히 자바를 공부합니다.");
 		}
-		
-
 	}
 
 }

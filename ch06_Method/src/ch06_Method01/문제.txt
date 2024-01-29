@@ -24,3 +24,5 @@ Resolve1 ~ Resolve5 문제를 해결하세요
    ****
    *****
    위처럼 출력되는 void star(int num) 메서드를 작성하고 사용해보세요.
+
+   

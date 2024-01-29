@@ -10,7 +10,6 @@ public class Resolve3 {
 		int result = total(10,100);
 		
 		System.out.println("누적합: "+result);
-		
 	}
 	
 	public static int total(int start, int end) {

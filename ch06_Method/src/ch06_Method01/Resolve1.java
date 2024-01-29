@@ -6,8 +6,7 @@ import java.util.Scanner;
 */   
 public class Resolve1 {
 	// main 메서드 내의 계산하는 부분을 옮긴다.
-	public static void main(String[] args) {
-	
+	public static void main(String[] args) {	
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("첫번째 정수: ");
