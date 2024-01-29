@@ -20,7 +20,7 @@ public class Resolve4 {
 		// 초기값에 -1하는 이유:  num.length는 배열 길이보다 1 큰 값임
 		// 배열의 인덱스가 0부터 시작하므로, 배열 길이가 10이라면 유효한 인덱스는 0~9까지다.
 		for(int i= num.length -1; i>=0; i-- ) {
-			System.out.println(num[i]);
+			System.out.print(num[i]+", ");
 		}
 		
 	}	

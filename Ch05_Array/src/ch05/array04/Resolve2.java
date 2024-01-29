@@ -6,7 +6,7 @@ public class Resolve2 {
 		
 		String[] name = {"영정원","일정원","이정원","삼정원","오정원","육정원","칠정원","팔정원","구정원","열정원"};
 		System.out.println(Arrays.toString(name));
-		for(int i=name.length -1;i >= 0;i--) {
+		for(int i= name.length -1;i >= 0;i--) {
 			System.out.print(name[i]+", ");
 		}
 		/* System.out.println(); */

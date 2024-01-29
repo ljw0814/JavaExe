@@ -4,14 +4,17 @@ import java.util.Arrays;
 public class Resolve1 {
 	public static void main(String[] args) {
 		
-		String[] name = {"일원","이원","삼원","4원","5원","6원","7원","8원","9원","10원"};
+		String[] name = {"정원","길동","철수","유리","꺽정","소정","정훈","동훈","아이린","한소희"};
 		
-		System.out.println(Arrays.toString(name));
+//		System.out.println(Arrays.toString(name));
 		
 		for(int i=0; i<name.length;i++) {
-			System.out.println(name[i] = " ");
+			System.out.print(name[i]+", ");			
 		}
-
+		System.out.println();
+		for(String arr : name) { // int arr: name[i] 틀림 for each 조건에 (변수:변수)임
+			System.out.print(arr+", ");
+		}
 		
 	}
 }

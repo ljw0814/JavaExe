@@ -1,4 +1,4 @@
-package ch.continue11;
+package ch03.continue11;
 
 public class ContinueFx {
 

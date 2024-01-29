@@ -18,7 +18,7 @@ public class Resolve3 {
 			}
 			int avg = total/num.length;
 			System.out.println("학생들의 총 점수는: " + total);
-			System.out.println("학생들의 평균 점수는: " + avg);
+			System.out.println("학생들의 평균 점수는: " +(double)avg);
 			sc.close();
 	}
 }
