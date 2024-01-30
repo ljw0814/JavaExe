@@ -6,18 +6,15 @@ import java.util.Scanner;
 
 public class Resolve4 {
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("구구단의 숫자를 입력하시오: ");
-		int dan = sc.nextInt();	
-		gugudan(dan);
-		
+	gugudan(3);
+	}
+	public static void gugudan(int num) {
+		for(int i =1; i<=9; i++) {
+			int dan = num * i; 
+
+			System.out.println(num+"X"+i+"="+dan);
 		}
-	
-	public static void gugudan(int dan) {
-		for(int i=1; i <=9; i++) {
-			int puls = dan*i;
-			System.out.println(dan+"X"+i+"= "+puls);
-		}
+
 	}
 }
 
