@@ -15,5 +15,9 @@ public class TestClass {
     // 메서드
     public void printVar() {
         System.out.println("My variable: " + myVar);
-    }
+    } 
 }
+
+/*
+ * public class main { public st }
+ */
