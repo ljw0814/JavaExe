@@ -1,4 +1,4 @@
-package ch08.class04class04;
+package ch08.class04;
 
 /**
  * 객체가 최초 생성될 때 비로서 메서드가 메모리에 올라간다.

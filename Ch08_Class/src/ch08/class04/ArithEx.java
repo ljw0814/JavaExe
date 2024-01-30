@@ -1,4 +1,4 @@
-package ch08.class04class04;
+package ch08.class04;
 
 /* 일반 메서드는 객체를 만들어서 호출해야 한다.
  * */
