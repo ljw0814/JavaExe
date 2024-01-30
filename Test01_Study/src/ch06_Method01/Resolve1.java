@@ -32,7 +32,7 @@ public class Resolve1 {
 	}
 }
 
-
+// 커밋추가
 
 
 
