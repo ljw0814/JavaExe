@@ -1,4 +1,4 @@
-package ch06.method01;
+package ch06_Method01;
 
 //5. star(5);
 //을 입력하면 

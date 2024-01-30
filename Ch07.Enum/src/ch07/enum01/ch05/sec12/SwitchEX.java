@@ -16,19 +16,19 @@ public class SwitchEX {
 		//sel의 값과 같은 case로 이동하여 실행하고 
 		//break를 만나면 switch문이 종료된다.
 		switch(sel) {
-		case 1:
+		case Menu.ZZAJANGMYUN:
 			System.out.println("짜장면이 나왔습니다");
 			break;
-		case 2:
+		case Menu.ZZAMPONG:
 			System.out.println("짬뽕이 나왔습니다");
 			break;
-		case 3:
+		case Menu.TANSUYUK:
 			System.out.println("탕수육이 나왔습니다");
 			break;
-		case 4:
+		case Menu.YOUSANSUL:
 			System.out.println("유산슬이 나왔습니다");
 			break;
-		case 5:
+		case Menu.YOULINGI:
 			System.out.println("유린기가 나왔습니다");
 			break;
 		default:	//else와 같은 의미
