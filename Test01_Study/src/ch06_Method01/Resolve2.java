@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Resolve2 {
 	
 	public static void calculate(int a, int b) {
-		// 절대값 계산 메소드
+		// 절대값 계산 메소드 Math.abs(절대값으로바꿀값)
 		int absolute = Math.abs(a - b);
 		System.out.println(absolute);
 	}	

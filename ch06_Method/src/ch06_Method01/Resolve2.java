@@ -6,19 +6,22 @@ import java.util.Scanner;
 
 public class Resolve2 {
 	
-	public static void calculate(int a, int b) {
-		// 절대값 계산 메소드
-		int absolute = Math.abs(a - b);
-		System.out.println(absolute);
-	}	
-	
 	public static void main(String[] args) {
 		
-		int num1 = 15;
-		int num2 = 10;
+		int num1 = 10;
+		int num2 = 15;
 		// 메서드 호출
-		calculate(num1, num2);
+		printAbs(num1, num2);
 	}
+	public static void printAbs(int a, int b) {
+		// 절대값 계산 메소드
+		int result  = a - b;
+		if(result<0) {
+			result = -result;
+		}
+		System.out.println(result);
+	}	
+	
 }
 
 
