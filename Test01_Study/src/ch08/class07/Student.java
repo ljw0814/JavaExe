@@ -1,6 +1,6 @@
 package ch08.class07;
 //Student 클래스 정의
-public class Student {
+public class Student { 
 	
 	public static void main(String[] args) {
 		// Student 객체 생성
