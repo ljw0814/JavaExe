@@ -12,7 +12,7 @@ public class WatchTime {
 	}
 	//public void viewTime(WatchTime this)
 	public void viewTime() {// 메모리에 올라간다, 첫번째 객체를 사용할 때 viewTime을 올려서 재사용한다.
-		System.out.printf("[%02d:%02d:%02d]\n", hour, min, sec);
+		System.out.printf("[%02d:%02d:%02d]\n", hour, min, sec);//지역변수에 hour이 없으면 this.hour로 자동으로 바꾼다.
 	}
 	
 	public static void main(String[] args) {
@@ -24,7 +24,7 @@ public class WatchTime {
 		WatchTime wtNum1 = new WatchTime(13, 23, 53);
 		System.out.println("wtNum1:" + wtNum1);
 		System.out.printf("wtNum1:%x\n", wtNum1.hashCode());
-		wtNum1.viewTime();//실제로 내부적으로는 viewTime(wtNum1); 이렇게 호출된다.
+		wtNum1.viewTime();//실제로 내부적으로는 viewTime(wtNum1); 이렇게 호출된다.wtNum1에 참조변수를 담음,
 	}
 }
 
