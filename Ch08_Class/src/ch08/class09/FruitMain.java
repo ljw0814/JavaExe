@@ -23,13 +23,15 @@ package ch08.class09;
  * */
 public class FruitMain {
 	public static void main(String[] args) {
+		// 과일 판매자 객체 생성 (20)
 		FruitSeller seller = new FruitSeller(20);
+		// 과일 구매자 객체 생성 (10000)
 		FruitBuyer buyer = new FruitBuyer(10000);
 		
 		seller.showSaleRestlt();
 		buyer.showBuyResult();
 		
-		buyer.buyApple(seller, 2000);
+		buyer.buyApple(seller, 2000);//buyApple 메서드 호출,
 		
 		seller.showSaleRestlt();
 		buyer.showBuyResult();

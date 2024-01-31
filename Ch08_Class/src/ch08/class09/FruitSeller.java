@@ -4,11 +4,12 @@ public class FruitSeller {
 	private int numOfApple;			// 사과개수
 	private int saleMoney;			// 판매금액
 	final int APPLE_PRICE = 1000;	// 사과 가격 (상수)
-	
+	// 생성자: 초기 사과 개수 설정
 	public FruitSeller(int numOfApple) {
 		this.numOfApple = numOfApple;
 	//this.numOfApple--> this를 붙여야 우선순위를 줌. 
 	}
+	// 과일 판매 메서드
 	public int saleApple(int money) {
 		int num = money/APPLE_PRICE;
 		numOfApple -= num;
