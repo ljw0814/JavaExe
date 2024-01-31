@@ -1,11 +1,11 @@
-package ch09.extends03;
+package ch09.extends04;
 
 // 필드 또한 상속이 된다.
 // 생선되는 순서 child자식 안에 부모의 정보가 있어서 
 // 부모까지 생성된다??
 public class ExtendsMain {
 	public static void main(String[] args) {
-		Child child = new Child();
+		Child child = new Child(7, 9999L, 72);
 		child.handsome();
 		child.wealth();
 		child.play();

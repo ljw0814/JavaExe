@@ -23,14 +23,24 @@ package ch08.class08;
  * */
 public class FruitMain {
 	public static void main(String[] args) {
-		FruitSeller seller = new FruitSeller(20);
-		FruitBuyer buyer = new FruitBuyer(10000);
 		
+		// 과일 판매자 객체 생성
+		FruitSeller seller = new FruitSeller(20);
+		
+		// 과일 구매자 객체 생성
+		FruitBuyer buyer = new FruitBuyer(10000);
+		//FruitBuyer 클래스의 객체를 생성하는 부분입니다. 
+		//이때 생성자 FruitBuyer(int money)에
+		//매개변수로 10000을 전달하여 객체를 초기화하고 있습니다. 
+		
+		// 초기 상태 출력
 		seller.showSaleRestlt();
 		buyer.showBuyResult();
 		
+		 // 과일 구매
 		buyer.buyApple(seller, 2000);
 		
+		// 구매 후 상태 출력
 		seller.showSaleRestlt();
 		buyer.showBuyResult();
 	}
