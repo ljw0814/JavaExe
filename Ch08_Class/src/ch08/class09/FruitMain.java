@@ -1,4 +1,4 @@
-package ch08.Class08;
+package ch08.class09;
 
 /*class와 class간의 상호작용
  * 요구사항 : 과일 구매자는 과일판매자한테 사과 2개를 구매했다.

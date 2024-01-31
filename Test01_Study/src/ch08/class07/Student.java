@@ -3,7 +3,7 @@ package ch08.class07;
 public class Student { 
 	
 	public static void main(String[] args) {
-		// Student 객체 생성
+		// new키워드를 사용해 Student 객체 생성
 		Student student1 = new Student("John Doe", "2021001", 90);
 		// display 메서드 호출
 		student1.display();

@@ -1,4 +1,4 @@
-package ch08.Class08;
+package ch08.class08;
 
 public class FruitSeller {
 	private int numOfApple;			// 사과개수

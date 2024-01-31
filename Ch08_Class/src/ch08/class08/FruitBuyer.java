@@ -1,4 +1,4 @@
-package ch08.Class08;
+package ch08.class08;
 
 public class FruitBuyer {
 	private int money;
