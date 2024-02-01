@@ -10,6 +10,7 @@ import ch09.resolve07.answer01.Sub;
 import ch09.resolve07.answer02.Triangle;
 import ch09.resolve07.answer03.ArrayUtility;
 import ch09.resolve07.answer04.ArrayUtility2;
+import ch09.resolve07.answer05.Child;
 
 //import ch09.resolve07.answer01.Add;
 //import ch09.resolve07.answer01.Sub;
@@ -174,7 +175,14 @@ public static void answer4(Scanner sc) {
 
 // 5번 문제에 대한 풀이
 public static void answer5(Scanner sc) {
-
+	Child alex = new Child(15);
+	Child james = new Child(9);
+	
+	alex.get(james, 2);
+	james.get(alex, 7);
+	
+	System.out.println("alex의 구슬 수=" + alex.getBallCnt());
+	System.out.println("james의 구슬 수=" + james.getBallCnt());
 }
 
 // 전체의 시작인 main 메서드
