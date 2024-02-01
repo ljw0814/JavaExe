@@ -28,6 +28,7 @@ public class CalcMain {
 			// 객체 지향 언어의 특징
 			// 관리의 편의성(코드를 줄일 수 있다)
 			Calc[] calcs = new Calc[] {add, sub, mul, div};
+			
 			System.out.println("[2개의 숫자를 입력 후 연산]");
 			System.out.print("첫번째 수 입력 >> ");
 			int num0 = sc.nextInt();

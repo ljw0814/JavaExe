@@ -1,34 +1,38 @@
 package ch08.class02;
-
 import java.util.Scanner;
-
-
+// 메뉴 출력, 키오스크 기능, 점원이 음식 전달
+// 음식과 가격, 선택한 음식이름과 개수를 받고, 음식 전달
 public class Restaurant {
 	// 필드
-	public String name;
+	private String[] foodN = {"스테이크","제로콜라","파스타","샐러드"};
+	private int[] foodPri = {48000,2000,18000,16000};
+	private int selectNum;
 	public Scanner sc;
-	private String[] foods = {"냉면", "떡볶이", "쌀국수",
-							"칼국수", "순대", "튀김", "라면"};
-	private int selectNum;	
 	
-	// 메서드
-	public void viewMenu() {
-		System.out.println("---[" + name + "]---");
-		for(int i=0;i<foods.length;i++) {
-			System.out.println(i + "." + foods[i]);
+	// 메서드	메뉴판 출력
+	public void viewMain() {
+		System.out.println("--------[메뉴판]--------");
+		for(int i=0; i<foodN.length;i++) {
+			for(int j = 0; j < i; j++) {
+				System.out.println(foodN[i]+foodPri[j]);
+			}
 		}
 	}
-	public void selectFood() {
-		System.out.println("---[" + name + "]---");
-		System.out.print("어떤 음식을 선택하시겠습니까? >> ");
-		selectNum = sc.nextInt();
+	
+	// 주문 받는 메서드
+	public void orderFood(int[] foodPri, int selectNum) {
+		
 	}
-	public void deliveryFood() {
-		System.out.println("---[" + name + "]---");
-		String food = foods[selectNum];
-		System.out.println(food + "이 나왔습니다.");
-		System.out.println("맛있게 드세요 ^^");
+	
+	
+	
+	// 결제금액을 알려주는 메서드
+	public void calc() {
+		total = selectNum * foodpri[];
+		
 	}
+	
+	
 	
 }
 
