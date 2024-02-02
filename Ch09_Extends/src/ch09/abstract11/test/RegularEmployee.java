@@ -1,4 +1,4 @@
-package ch09.abstract11;
+package ch09.abstract11.test;
 
 // 정규직 사원
 public class RegularEmployee extends Employee{
@@ -24,7 +24,7 @@ public class RegularEmployee extends Employee{
 		// 부모의 기능 + 추가 확장
 		super.showEmployeeInfo();	// Emplyee의 show~ 호출
 		System.out.println("bonus : " + bonus);
-		System.out.printf("monthPay : %.2f\n", getMonthPay());
+		System.out.printf("monthPay : %.2f\n", getMonthPay()); //.2f
 	}
 
 	

@@ -1,11 +1,14 @@
-package ch09.abstract11;
+package ch09.abstract11.test;
 
 import java.util.Scanner;
 
 public class EmployeeManager {
 	private final int EMP_NUM = 100;	// 100명 사원이 최대
+
 	// Employee의 자식객체들을 저장
 	private Employee[] empArr = new Employee[EMP_NUM];
+	//Employee배열을 생성하고, 배열크기를 EMP_NUM(즉 최대 사원수)로 초기화함
+	
 	private int numOfEmp = 0;	// 저장된 사원객체 수, 다음 사원이 저장될 index
 	private Scanner sc = new Scanner(System.in);
 	
@@ -21,8 +24,10 @@ public class EmployeeManager {
 		System.out.println("8. 종료");
 		System.out.println("번호 입력 >> ");
 		int sel = sc.nextInt();
+
 		return sel;
 	}
+	// 사용자로부터 입력받은 정보로 정규직 객체를 생성하는 메서드
 	private RegularEmployee createRegularEmployee() {
 		System.out.print("사번 >> ");
 		String empno = sc.next();
@@ -36,6 +41,7 @@ public class EmployeeManager {
 				new RegularEmployee(empno, name, yearSalary, bonus);
 		return emp;
 	}
+	 // 사용자로부터 입력받은 정보로 임시직 객체를 생성하는 메서드
 	private TempEmployee createTempEmployee() {
 		System.out.print("사번 >> ");
 		String empno = sc.next();
@@ -49,6 +55,7 @@ public class EmployeeManager {
 				new TempEmployee(empno, name, yearSalary, hireYear);
 		return emp;
 	}
+	// 사용자로부터 입력받은 정보로 일용직 객체를 생성하는 메서드
 	private PartTimeEmployee createPartTimeEmployee() {
 		System.out.print("사번 >> ");
 		String empno = sc.next();
@@ -62,6 +69,7 @@ public class EmployeeManager {
 				new PartTimeEmployee(empno, name, dailyPay, workDay);
 		return emp;
 	}
+    // 생성된 객체를 배열에 저장하는 메서드
 	private boolean saveEmployee(Employee emp) {
 		boolean isSave = true;
 		
@@ -75,32 +83,23 @@ public class EmployeeManager {
 		
 		return isSave;
 	}
+	// 저장된 모든 사원 정보를 출력하는 메서드
 	private void viewAllEmployeeInfo() {
 		for(int i=0;i<this.numOfEmp;i++) {
 			this.empArr[i].showEmployeeInfo();
 		}
 	}
-	private void viewRegEmployeeInfo() {
-		for(int i=0;i<this.numOfEmp;i++) {
-			Employee emp = this.empArr[i];
-			if(emp instanceof RegularEmployee)
+	// 저장된 정규직 사원 정보를 출력하는 메서드 
+	private void viewRegEmp() {
+		System.out.println("---[정규직 사원 정보 보기]---");
+		for(int i=0;i<this.numOfEmp;i++) { // numOfEmp는 저장된 사원객체 수, 다음 사원이 저장될 index
+			if(this.empArr[i] instanceof RegularEmployee) {//empArr는 자식객체, instanceof연산자로 객체가 하위 클래스인지 확인함,
 				this.empArr[i].showEmployeeInfo();
+			}
+		
 		}
 	}
-	private void viewTempEmployeeInfo() {
-		for(int i=0;i<this.numOfEmp;i++) {
-			Employee emp = this.empArr[i];
-			if(emp instanceof TempEmployee)
-				this.empArr[i].showEmployeeInfo();
-		}
-	}
-	private void viewPartTimeEmployeeInfo() {
-		for(int i=0;i<this.numOfEmp;i++) {
-			Employee emp = this.empArr[i];
-			if(emp instanceof PartTimeEmployee)
-				this.empArr[i].showEmployeeInfo();
-		}
-	}
+	// 프로그램 실행 메서드
 	public void run() {
 		boolean isRun = true;
 		while(isRun) {
@@ -120,15 +119,6 @@ public class EmployeeManager {
 			case EmpMenu.ALL_INFO:
 				emp = null;
 				viewAllEmployeeInfo();
-				break;
-			case EmpMenu.REG_INFO:
-				viewRegEmployeeInfo();
-				break;
-			case EmpMenu.TEMP_INFO:
-				viewTempEmployeeInfo();
-				break;
-			case EmpMenu.PART_INFO:
-				viewPartTimeEmployeeInfo();
 				break;
 			case EmpMenu.EXIT:
 				emp = null;
