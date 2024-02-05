@@ -29,8 +29,9 @@ public class QuestionMain {
 		while(isRun) {
 			qm.printQuestion();
 			int sel = qm.getSelectQuestion(sc);
-			
-			if(sel >=0 && sel < qm.qaArr.length) {
+			//1부터~3이하의 값 입력
+			if(sel >=0 && sel <= qm.qaArr.length) {
+				// 0이상~2이하의 인덱스로 변환
 				IQuestionAnswer iqa = qm.qaArr[sel-1];
 				iqa.answer(sc);				
 			}else {
