@@ -2,6 +2,10 @@ package ch09.resolve14;
 
 import java.util.Scanner;
 
+import ch09.resolve14.question01.InkJetPrinter;
+import ch09.resolve14.question01.LaserPrinter;
+import ch09.resolve14.question01.P_INTERFACE;
+
 public class Answer1 implements IQuestionAnswer {
 
 	@Override
@@ -21,16 +25,40 @@ public class Answer1 implements IQuestionAnswer {
 				+ "\r\n"
 				+ "                  프린터\r\n"
 				+ "\r\n"
-				+ "잉크젯프린터             레이저프린터";
+				+ "잉크젯프린터             레이저프린터\r\n\r\n";
 		
 		System.out.println(question);
 	}
 
+//	String modelName, String manufacturer, 
+//	P_INTERFACE pInterface, int printCount,
+//	int paperRemains, int inkRemainders
 	@Override
 	public void answer(Scanner sc) {
 		sc.nextLine();		// Enter치기 전까지 멈춰 있음
-		System.out.println("1번 문제 실행~");
+		
+		InkJetPrinter ijP = 
+				new InkJetPrinter("HP-264", "HP", 
+						P_INTERFACE.USB, 20, 100, 50);
+		ijP.print();
+		ijP.print();
+		ijP.print();
+		System.out.println(ijP);
+		
+		LaserPrinter lP = 
+				new LaserPrinter("Samsung-111", "Samsung", 
+						P_INTERFACE.PARALLEL_PORT, 20, 100, 100);
+		lP.print();
+		lP.print();
+		lP.print();
+		System.out.println(lP);
+		
 		sc.nextLine();		// Enter치기 전까지 멈춰 있음
+	}
+
+	@Override
+	public boolean isRun() {
+		return true;
 	}
 
 }

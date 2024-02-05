@@ -6,10 +6,3 @@ public interface ICar {
 	public void accel() throws InterruptedException;
 	public void footBreak() throws InterruptedException;
 }
-	public void print() {
-		if(paperResside >  0){
-			System.out.println();
-			
-			
-		}
-	}

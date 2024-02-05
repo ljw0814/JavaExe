@@ -4,5 +4,5 @@
 /**
  * 
  */
-module Ch09_Extends {
+module Ch10_Collection {
 }
