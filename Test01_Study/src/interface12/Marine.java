@@ -1,4 +1,4 @@
-package ch09.interface12;
+package interface12;
 
 public class Marine implements StarUnit {
 

@@ -42,6 +42,8 @@ public class CarMain {
 		
 		for(int i=0;i<carArr.length;i++) {
 			carTester.setCar(carArr[i]);
+//			DI(dependency ): 의존성 주입
+//			IoC : 역제어
 			
 			score[i] += carTester.onOffTest();
 			System.out.printf("---OnOff 테스트 점수는 %d입니다\n", score[i]);
