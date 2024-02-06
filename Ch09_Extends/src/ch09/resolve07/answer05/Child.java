@@ -13,13 +13,13 @@ package ch09.resolve07.answer05;
 //  마지막으로 각각의 어린이가 보유하고 있는 구슬의 수를 출력한다
 //  프로그램을 종료한다.
 
-/*클래스 설계에서 접근권한 설정
+/* 클래스 설계에서 접근권한 설정
  * 1) 필드 -> private
- *	  메서드 -> public
- *	  메서드 중에 내부에서만 사용하는 메서드 -> private
- **/
+ *    메서드 -> public
+ * 2) 메서드 중에 내부에서만 사용하는 메서드 -> private
+ * */
 public class Child {
-	int ballCnt;
+	private int ballCnt;
 	
 	public Child(int ballCnt) {
 		this.ballCnt = ballCnt;
@@ -32,10 +32,10 @@ public class Child {
 		other.sub(cnt);
 		add(cnt);		
 	}
-	public void add(int cnt) {
+	private void add(int cnt) {
 		this.ballCnt += cnt;
 	}
-	public void sub(int cnt) {
+	private void sub(int cnt) {
 		this.ballCnt -= cnt;
 	}
 	public int getBallCnt() {
