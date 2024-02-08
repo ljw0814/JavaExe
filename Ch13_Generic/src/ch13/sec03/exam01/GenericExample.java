@@ -2,6 +2,7 @@ package ch13.sec03.exam01;
 
 public class GenericExample {
 	//제네릭 메소드
+	// 	<T>->타입파라리머, Box<T>->리턴값, 매개변수->boxing(T t)
 	public static <T> Box<T> boxing(T t) {
 		Box<T> box = new Box<T>();
 		box.set(t);

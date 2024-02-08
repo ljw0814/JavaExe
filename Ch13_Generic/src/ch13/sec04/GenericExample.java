@@ -2,6 +2,7 @@ package ch13.sec04;
 
 public class GenericExample {
 	//제한된 타입 파라미터를 갖는 제네릭 메소드
+	// Number이거나 Number의 자식 객체만 T에 전달 가능
 	public static <T extends Number> boolean compare(T t1, T t2) {
 		//T의 타입을 출력
 		System.out.println("compare(" + t1.getClass().getSimpleName() + ", " +
