@@ -1,5 +1,5 @@
 package ch16.lambda02.ch16.sec01;
-
+//교재 698p
 public class LambdaExample {
 	public static void main(String[] args) {
 		action((x,y)-> {
