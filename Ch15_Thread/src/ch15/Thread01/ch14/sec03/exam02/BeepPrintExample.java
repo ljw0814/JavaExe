@@ -4,6 +4,7 @@ import java.awt.Toolkit;
 
 public class BeepPrintExample {
 	public static void main(String[] args) {
+		// Worker 스레드 생성 후 -> start() -> run() 실행
 		Thread thread = new Thread(new Runnable() {
 			public void run() {
 				Toolkit toolkit = Toolkit.getDefaultToolkit();
