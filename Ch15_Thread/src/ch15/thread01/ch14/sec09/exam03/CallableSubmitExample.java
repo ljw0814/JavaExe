@@ -25,7 +25,8 @@ public class CallableSubmitExample {
 					return sum;
 				}
 			});
-
+			// 스레드풀내의 임의의 스레드가 call()을 처리하고 난 결과를 아래처럼
+			// 같는다
 			try {
 				int result = future.get();
 				System.out.println("\t리턴값: " + result);
