@@ -27,11 +27,17 @@ public class StreamCalc {
 		System.out.println();
 		
 		
-		//--list
+		//--배열list
 		Stream<String> strm = nameList.stream();
 		Stream<String> strmF = strm.filter(s->s.length() >= 5);
 		strmF.forEach(s->System.out.print( s + ", "));
 		System.out.println();
+		
+		/* 한번 사용한 스트림은 재사용 불가능(내부 데이터 모두 흘려보냈다)
+		System.out.println("------------------------------");
+		strmF.forEach(s->System.out.print(s + ", "));
+		System.out.println();
+		*/
 		
 		// 위의 for문을 아래처럼 Stream을 사용해 간결하게 바꿈 또는 위의 배열 리스트를 아래처럼 바꿈
 		nameList.stream()							// 1) 스트림객체

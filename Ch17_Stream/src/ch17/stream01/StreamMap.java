@@ -43,7 +43,30 @@ public class StreamMap {
 			System.out.println();
 			
 			customerList.stream()
-						.map(c->c.getAge())
+						.map(c->c.getAge()) // int -> Object로 스트림 (AutoBoxing)
 						.forEach(s->System.out.print(s + ", "));
+			System.out.println();
+			
+			customerList.stream()
+						.mapToInt(c->c.getAge()) // int -> int(위보다 내부적 성능이 낫다)
+						.forEach(s->System.out.print(s + ", "));			
+			System.out.println();
+			
+			
+					
+			int cnt = (int)customerList.stream().count();			
+			System.out.println("리스트 수는" + cnt);
+			
+			int sum = customerList.stream()
+					.mapToInt(c->c.getAge()) // int -> int(위보다 내부적 성능이 낫다)
+				.sum();			
+			System.out.println("총합은"+cnt);
+			
+			double avg = customerList.stream()
+					.mapToInt(c->c.getAge())
+					.average().getAsDouble();
+			System.out.println("평균은 " + avg);
+			
+			
 	}
 }
