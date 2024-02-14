@@ -1,5 +1,5 @@
 package ch16.lambda01.ch09.sec07.exam01;
-// 교재 익명객체 414p
+// 교재 익명객체 414~415p
 public class Car {
 	//필드에 Tire 객체 대입
 	private Tire tire1 = new Tire();
@@ -11,7 +11,7 @@ public class Car {
 	};
 	
 	//메소드(필드이용)
-	public void run() {
+	public void run1() {
 		tire1.roll();
 		tire2.roll();
 	}
