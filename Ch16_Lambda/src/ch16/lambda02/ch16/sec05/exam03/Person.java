@@ -10,7 +10,7 @@ public class Person {
 	public Member getMember2(Creatable2 creatable) {
 		String id = "winter";
 		String name = "한겨울";
-		Member member = creatable.create(id, name);
+		Member member = creatable.create(id, name); // 두개짜리 메서드를 이용해 리턴하고 있다.
 		return member;
 	}
 }

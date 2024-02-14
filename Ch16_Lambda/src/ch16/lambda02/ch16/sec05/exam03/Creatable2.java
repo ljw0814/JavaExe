@@ -2,5 +2,5 @@ package ch16.lambda02.ch16.sec05.exam03;
 
 @FunctionalInterface
 public interface Creatable2 {
-	public Member create(String id, String name);
+	public Member create(String id, String name);// 두개짜리 파라미터를 가진 생성자를 
 }
