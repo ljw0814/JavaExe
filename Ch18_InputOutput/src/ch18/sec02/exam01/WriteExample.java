@@ -3,7 +3,7 @@ package ch18.sec02.exam01;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-
+ 
 public class WriteExample {
     // 바이트 출력
     public static void main(String[] args) {

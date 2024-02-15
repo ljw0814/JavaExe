@@ -9,7 +9,7 @@ import java.io.OutputStream;
 
 public class BufferFileCopy {
 	public static void main(String[] args) throws IOException {
-		
+		 
 		InputStream in = new FileInputStream("cat.jpg");
 		OutputStream out = new FileOutputStream("고양이.jpg");
 		

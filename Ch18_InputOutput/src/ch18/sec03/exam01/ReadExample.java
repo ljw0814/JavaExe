@@ -4,7 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-
+ 
 //test1.db에 저장한 내용 1byte씩 읽기
 public class ReadExample {
 	public static void main(String[] args) {
