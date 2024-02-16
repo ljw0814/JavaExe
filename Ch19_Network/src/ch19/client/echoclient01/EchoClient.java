@@ -15,16 +15,21 @@ import java.net.Socket;
  * */
 public class EchoClient {
 	public static void main(String[] args) {
-		final int PORT = 9000;
+		final int PORT = 9001;
 		
-		try {						 //"127.0.0.1" 자신을 가리킴
-			Socket socket = new Socket("192.168.0.50",PORT);
+		try {
+			// IP, Port로 서버 프로그램과 연결시도 후 성공하면(서버에서는 accept()가 리턴)
+			// 스트림 생성
+			// 그리고 연결된 socket객체 리턴
+			//"127.0.0.1" 자신을 가리킴
+			Socket socket = new Socket("192.168.0.33",PORT);
+			// 키보드로부터 입력받기 위한 스트림 연결(Scanner 대신)
 			BufferedReader keyboard = new BufferedReader(
 						new InputStreamReader(System.in));
-					OutputStream out = socket.getOutputStream();
-					InputStream in = socket.getInputStream();
-					PrintWriter pw = new PrintWriter(new OutputStreamWriter(out));
-					BufferedReader br = new BufferedReader(new InputStreamReader(in));
+					OutputStream out = socket.getOutputStream();	// 서버로 전송 스트림
+					InputStream in = socket.getInputStream();		// 서버에서 수신 스트림
+					PrintWriter pw = new PrintWriter(new OutputStreamWriter(out)); 		// 전송
+					BufferedReader br = new BufferedReader(new InputStreamReader(in)); 	// 수신
 		
 					String line;
 					while(true) {
@@ -34,7 +39,7 @@ public class EchoClient {
 							break;
 						pw.println(line);
 						pw.flush();
-						
+						// 서버는 받은 후에 클라이언트로 echo
 						line = br.readLine();
 						System.out.println("서버로부터 echo 문자열: "+ line);
 					}
