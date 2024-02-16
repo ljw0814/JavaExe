@@ -1,20 +1,20 @@
 package ch19.server.jsonchatserver05;
-//필요한 입출력 및 네트워크 관련 기능을 사용하기 위한 Java 클래스들을 임포트합니다.
-import java.io.BufferedReader;           // 문자 입력 스트림에서 문자를 읽기 위한 클래스
-import java.io.IOException;             // 입출력 작업 시 발생할 수 있는 예외를 다루기 위한 클래스
-import java.io.InputStream;            // 바이트 입력 스트림에서 바이트를 읽기 위한 클래스
-import java.io.InputStreamReader;     // 바이트 입력 스트림에서 문자를 읽기 위한 클래스
-import java.io.OutputStream;           // 바이트 출력 스트림에서 바이트를 쓰기 위한 클래스
-import java.io.OutputStreamWriter;    // 바이트 출력 스트림에서 문자를 쓰기 위한 클래스
-import java.io.PrintWriter;            // 텍스트 출력 스트림에서 문자를 쓰기 위한 클래스
-import java.net.InetAddress;          // IP 주소를 나타내는 클래스
-import java.net.ServerSocket;         // 서버 소켓을 나타내는 클래스
-import java.net.Socket;               // 소켓을 나타내는 클래스
-import java.util.Hashtable;           // 키와 값의 쌍으로 데이터를 저장하는 해시 테이블 클래스
-import java.util.Iterator;            // 컬렉션을 반복하는 데 사용되는 인터페이스
-import java.util.Set;                 // 중복을 허용하지 않는 요소들의 집합을 나타내는 인터페이스
 
-import org.json.JSONObject;           // JSON 데이터를 다루기 위한 클래스
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Set;
+
+import org.json.JSONObject;
 
 /* 1) EchoServer
  *   - 서버소켓의 동작방식
@@ -137,6 +137,7 @@ class WorkerThread extends Thread {
 				 * 문자열 -> JSONObject 변환 -> cmd를 해석해서 어떤 명령인지?
 				 * */
 				JSONObject packetObj = new JSONObject(line);
+				// 명령(cmd)당 알맞은 처리를 해줌
 				processPacket(packetObj);
 				
 			}
@@ -147,9 +148,10 @@ class WorkerThread extends Thread {
 	
 	private void processPacket(JSONObject packetObj) throws IOException {
 		JSONObject ackObj = new JSONObject();
-		// 어떤 종류의 패킷을 
+		// 어떤 종류의 패킷을 보냈는지 분류하기 위한 정보
 		String cmd = packetObj.getString("cmd");
 		
+		// id 등록 요청
 		if(cmd.equals("ID")) {
 			// 클라이언트 요청 처리
 			String id = packetObj.getString("id");
@@ -164,8 +166,9 @@ class WorkerThread extends Thread {
 			PrintWriter pw = new PrintWriter(new OutputStreamWriter(out));
 			pw.println(ack);
 			pw.flush();
-		//
-		}else if(cmd.equals("ARITH")) {
+		}
+		// 사칙연산 업무 결과 요청
+		else if(cmd.equals("ARITH")) {
 			// 요청 처리
 			String id = packetObj.getString("id");
 			String op = packetObj.getString("op");
@@ -184,7 +187,9 @@ class WorkerThread extends Thread {
 			PrintWriter pw = new PrintWriter(new OutputStreamWriter(out));
 			pw.println(ack);
 			pw.flush();
-		}else if(cmd.equals("ALLCHAT")) {
+		}
+		// 접속자 전체한테 채팅 메시지 전송
+		else if(cmd.equals("ALLCHAT")) {
 			String id = packetObj.getString("id");
 			String msg = packetObj.getString("msg");
 			
@@ -208,7 +213,9 @@ class WorkerThread extends Thread {
 			String strBroad = broadObj.toString();
 			// 전체 전송
 			broadcast(strBroad);
-		}else if(cmd.equals("ONECHAT")) {
+		}
+		// 특정 id 대상한테 1:1 채팅
+		else if(cmd.equals("ONECHAT")) {
 			String id = packetObj.getString("id");
 			String yourid = packetObj.getString("yourid");
 			String msg = packetObj.getString("msg");
@@ -255,7 +262,7 @@ class WorkerThread extends Thread {
 			String id = idIter.next();
 			Socket sock = (Socket) ht.get(id);
 			
-			// 클라이언트한테는 보낼 필요가 없으므로
+			// 메시지를 보내온 클라이언트한테는 보낼 필요가 없으므로
 			if(sock==this.socket)
 				continue;
 			
