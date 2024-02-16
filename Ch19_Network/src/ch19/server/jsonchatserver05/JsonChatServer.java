@@ -1,6 +1,7 @@
 package ch19.server.jsonchatserver05;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -10,6 +11,8 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Hashtable;
+
+import org.json.JSONObject;
 
 /* 1) EchoServer
  *   - 서버소켓의 동작방식
@@ -51,21 +54,58 @@ public class JsonChatServer {
  * 3) json 명령 패킷 종류
  *    - {}내의 데이터를 값을 의미한다.
  *   3-1) id등록
+ *     [요청]
+ *     cmd:ID
  *     id:{id값}
+ *     
+ *     [응답]
+ *     cmd:ID
+ *     ack:ok(성공), fail(실패)
  *   3-2) 사칙 연산
+ *     [요청]
+ *     cmd:ARITH
  *     id:{id값}
  *     op:{연산자}
  *     val1:{첫번째값}
  *     val2:{두번째값}
+ *     
+ *     [응답]
+ *     cmd:ARITH
+ *     ack:{결과값}
+ *     
  *   3-3) 전체 채팅
+ *     [요청]
+ *     cmd:ALLCHAT
  *     id:{id값}
- *     youid:all
+ *     msg:{문자메시지}
+ *     
+ *     [응답]
+ *     cmd:ALLCHAT
+ *     ack:ok(성공), fail(실패)
+ *     
+ *     [전송]
+ *     cmd:BROADCHAT
+ *     id:{id값}
  *     msg:{문자메시지}
  *   3-4) 1:1 채팅
+      [요청]
+ *     cmd:ONECHAT
  *     id:{id값}
  *     youid:{상대id}
  *     msg:{문자메시지}
+ *     
+ *     [응답]
+ *     cmd:ONECHAT
+ *     ack:ok(성공), fail(실패)
+ *     
+ *     [전송]
+ *     cmd:UNIQCHAT
+ *     id:{id값}
+ *     msg:{문자메시지}
  * */
+
+// json 라이브러리 다운로드 후 등록
+//https://github.com/stleary/JSON-java
 
 class WorkerThread extends Thread {
 	private Socket socket;
@@ -86,17 +126,109 @@ class WorkerThread extends Thread {
 			PrintWriter pw = new PrintWriter(new OutputStreamWriter(out));
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
 			
-			String line;
 			while(true) {
-				line = br.readLine();
+				/*client가 json오브젝트를 string으로 변환해서 보낸 것을 수신*/
+				String line = br.readLine();
 				if(line == null)
 					break;
-				/*json패킷을 해석해서 알맞은 처리를 한다.*/
+				/*json패킷을 해석해서 알맞은 처리를 한다.
+				 * 문자열 -> JSONObject 변환 -> cmd를 해석해서 어떤 명령인지?
+				 * */
+				JSONObject packetObj = new JSONObject(line);
+				processPacket(packetObj);
 				
 			}
 		} catch (Exception e) {
 			System.out.printf("<서버-%s>%s\n", getName(), e.getMessage());
 		}
+	}
+	
+	private void processPacket(JSONObject packetObj) throws IOException {
+		JSONObject ackObj = new JSONObject();
+		String cmd = packetObj.getString("cmd");
+		
+		if(cmd.equals("ID")) {
+			// 클라이언트 요청 처리
+			String id = packetObj.getString("id");
+			ht.put(id, this.socket);	// 해시테이블에 id와 socket을 등록		
+			// 응답			
+			ackObj.put("cmd", "ID");
+			ackObj.put("ack", "ok");
+			// Json Obj -> 문자열
+			String ack = ackObj.toString();
+			// 클라이언트한테 전송
+			OutputStream out = this.socket.getOutputStream();
+			PrintWriter pw = new PrintWriter(new OutputStreamWriter(out));
+			pw.println(ack);
+			pw.flush();
+		}else if(cmd.equals("ARITH")) {
+			// 요청 처리
+			String id = packetObj.getString("id");
+			String op = packetObj.getString("op");
+			String val1 = packetObj.getString("val1");
+			String val2 = packetObj.getString("val2");
+			double v1 = Double.parseDouble(val1);
+			double v2 = Double.parseDouble(val2);
+			double result = arith(op, v1, v2);
+			// 응답
+			ackObj.put("cmd", "ARITH");
+			ackObj.put("ack", Double.toString(result));
+			// Json Obj -> 문자열
+			String ack = ackObj.toString();
+			// 클라이언트한테 전송
+			OutputStream out = this.socket.getOutputStream();
+			PrintWriter pw = new PrintWriter(new OutputStreamWriter(out));
+			pw.println(ack);
+			pw.flush();
+		}else if(cmd.equals("ALLCHAT")) {
+			String id = packetObj.getString("id");
+			String msg = packetObj.getString("msg");
+			
+			/* 클라이언트 응답 패킷 */
+			// 응답
+			ackObj.put("cmd", "ALLCHAT");
+			ackObj.put("ack", "ok");
+			// Json Obj -> 문자열
+			String ack = ackObj.toString();
+			// 클라이언트한테 전송
+			OutputStream out = this.socket.getOutputStream();
+			PrintWriter pw = new PrintWriter(new OutputStreamWriter(out));
+			pw.println(ack);
+			pw.flush();
+			
+			// 전체 전송 패킷
+			JSONObject broadObj = new JSONObject();
+			broadObj.put("cmd", "BROADCHAT");
+			broadObj.put("id", id);
+			broadObj.put("msg", msg);
+			String strBroad = broadObj.toString();
+			// 전체 전송
+			broadcast(strBroad);
+		}else if(cmd.equals("ONECHAT")) {
+			
+		}		
+	}
+	private void broadcast(String packet) {
+		
+	}
+	
+	private double arith(String op, double val1, double val2) {
+		double result=0.;
+		switch(op) {
+		case "+":
+			result = val1+val2;
+			break;
+		case "-":
+			result = val1-val2;
+			break;
+		case "*":
+			result = val1*val2;
+			break;
+		case "/":
+			result = val1/val2;
+			break;
+		}
+		return result;
 	}
 }
 
