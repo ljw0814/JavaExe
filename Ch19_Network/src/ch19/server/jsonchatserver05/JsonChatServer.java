@@ -36,7 +36,7 @@ public class JsonChatServer {
 			String mainThreadName = Thread.currentThread().getName();
 			/* main thread는 계속 accept()처리를 담당한다 */
 			while (true) {
-				System.out.printf("[서버-%s] Client접속을 기다립니다...", mainThreadName);
+				System.out.printf("[서버-%s] Client접속을 기다립니다...\n", mainThreadName);
 				Socket socket = serverSocket.accept();
 
 				/* worker thread는 Client와의 통신을 담당한다. */
@@ -207,7 +207,7 @@ class WorkerThread extends Thread {
 			
 			// 특정 yourid 사용 클라이언트에 전송 패킷
 			JSONObject broadObj = new JSONObject();
-			broadObj.put("cmd", "ALLCHAT");
+			broadObj.put("cmd", "BROADCHAT");
 			broadObj.put("id", id);
 			broadObj.put("msg", msg);
 			String strBroad = broadObj.toString();
