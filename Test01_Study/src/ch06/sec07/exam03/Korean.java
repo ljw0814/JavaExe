@@ -1,4 +1,4 @@
-package ch06.sec07.exam02;
+package ch06.sec07.exam03;
 
 public class Korean {
 
@@ -8,15 +8,15 @@ public class Korean {
 	String ssn;
 	// 생성자 선언
 	public Korean( String nat, String n, String s) {
-		this.nation = nat;
-		this.name = n;
-		this.ssn = s;
-		// 필드의 색깔을 파란색, 매개변수 색깔을 갈색으로 보여줌
-		/*위와 동일
 		name = n;
 		ssn = s;
 		nation = nat;
-		*/
+		
+		/*	console 출력창
+		 *  국적: 한국
+			이름: 이정원
+			주민등록번호: 970000-0000000
+		 	*/
 		
 		
 	}
