@@ -1,16 +1,15 @@
 package ch19.server.webserver03;
 
-//필요한 입출력 및 네트워크 관련 기능을 사용하기 위한 Java 클래스들을 임포트합니다.
-import java.io.BufferedReader;         // 문자 입력 스트림에서 문자를 읽기 위한 클래스
-import java.io.FileReader;             // 파일에서 문자를 읽기 위한 클래스
-import java.io.InputStream;            // 바이트 입력 스트림에서 바이트를 읽기 위한 클래스
-import java.io.InputStreamReader;      // 바이트 입력 스트림에서 문자를 읽기 위한 클래스
-import java.io.OutputStream;           // 바이트 출력 스트림에서 바이트를 쓰기 위한 클래스
-import java.io.OutputStreamWriter;    // 바이트 출력 스트림에서 문자를 쓰기 위한 클래스
-import java.io.PrintWriter;            // 텍스트 출력 스트림에서 문자를 쓰기 위한 클래스
-import java.net.InetAddress;          // IP 주소를 나타내는 클래스
-import java.net.ServerSocket;         // 서버 소켓을 나타내는 클래스
-import java.net.Socket;               // 소켓을 나타내는 클래스
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 public class SimpleWebServer {
 	public static void main(String[] args) {

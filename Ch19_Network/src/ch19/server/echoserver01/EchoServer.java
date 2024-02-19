@@ -46,6 +46,8 @@ public class EchoServer {
 				if (line == null) // 통신이 끊어졌다. 상대방이 종료했다.
 					break;
 				System.out.println("클라이언트로부터 수신 : " + line);
+				
+				// echo
 				pw.println(line); // 데이터 + '\n';
 				pw.flush(); // 버퍼에 남아있는 데이터 즉시 전송해
 			}

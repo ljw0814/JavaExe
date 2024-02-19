@@ -1,4 +1,4 @@
-package ch19.server.jsonchatclient04;
+package ch19.client.jsonchatclient04;
 
 public interface ServiceMenu {
 	public int ALL_CHAT = 1;

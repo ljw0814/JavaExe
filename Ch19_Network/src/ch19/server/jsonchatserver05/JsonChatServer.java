@@ -14,6 +14,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /* 1) EchoServer
@@ -29,7 +30,7 @@ import org.json.JSONObject;
 public class JsonChatServer {
 	public static void main(String[] args) {
 		final int PORT = 9000;
-		Hashtable clientHt = new Hashtable(); // 접속자를 관리하는 테이블
+		Hashtable<String, Socket> clientHt = new Hashtable<>(); // 접속자를 관리하는 테이블
 
 		try {
 			ServerSocket serverSocket = new ServerSocket(PORT);
@@ -104,6 +105,23 @@ public class JsonChatServer {
  *     cmd:UNICHAT
  *     id:{id값}
  *     msg:{문자메시지}
+ *     
+ *   3-5) 접속자 id 리스트
+ *     [요청]
+ *     cmd:REQIDLIST
+ *     id:{id값}
+ *   
+ *     [응답]
+ *     cmd:REQIDLIST
+ *     list:{id0, id1, id2, ...}
+ *   3-6) 프로그램 종료
+ *     [요청]
+ *     cmd:QUIT
+ *     id:{id값}
+ *     
+ *     [응답]
+ *     cmd:QUIT
+ *     id:{id값}
  * */
 
 // json 라이브러리 다운로드 후 등록
@@ -111,9 +129,9 @@ public class JsonChatServer {
 
 class WorkerThread extends Thread {
 	private Socket socket;
-	private Hashtable ht;
+	private Hashtable<String, Socket> ht;
 
-	public WorkerThread(Socket socket, Hashtable ht) {
+	public WorkerThread(Socket socket, Hashtable<String, Socket> ht) {
 		this.socket = socket;
 		this.ht = ht;
 	}
@@ -126,11 +144,13 @@ class WorkerThread extends Thread {
 			OutputStream out = socket.getOutputStream();
 			InputStream in = socket.getInputStream();
 			PrintWriter pw = new PrintWriter(new OutputStreamWriter(out));
+//			BufferedReader br = new BufferedReader(new InputStreamReader(in, "UTF-8"));
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
 			
 			while(true) {
 				/*client가 json오브젝트를 string으로 변환해서 보낸 것을 수신*/
 				String line = br.readLine();
+				//System.out.println("raw data=" + line);
 				if(line == null)
 					break;
 				/*json패킷을 해석해서 알맞은 처리를 한다.
@@ -147,6 +167,7 @@ class WorkerThread extends Thread {
 	}
 	
 	private void processPacket(JSONObject packetObj) throws IOException {
+		// 클라이언트에 응답을 하기 위한 json 오브젝트
 		JSONObject ackObj = new JSONObject();
 		// 어떤 종류의 패킷을 보냈는지 분류하기 위한 정보
 		String cmd = packetObj.getString("cmd");
@@ -156,10 +177,13 @@ class WorkerThread extends Thread {
 			// 클라이언트 요청 처리
 			String id = packetObj.getString("id");
 			ht.put(id, this.socket);	// 해시테이블에 id와 socket을 등록		
+			
+			System.out.printf("<서버-%s> Id=%s 등록\n", getName(), id);
 			// 응답			
 			ackObj.put("cmd", "ID");
 			ackObj.put("ack", "ok");
 			// Json Obj -> 문자열
+			//String ack = new String(ackObj.toString().getBytes(), "utf-8");
 			String ack = ackObj.toString();
 			// 클라이언트한테 전송
 			OutputStream out = this.socket.getOutputStream();
@@ -177,6 +201,9 @@ class WorkerThread extends Thread {
 			double v1 = Double.parseDouble(val1);
 			double v2 = Double.parseDouble(val2);
 			double result = arith(op, v1, v2);
+			
+			System.out.printf("<서버-%s> Id=%s 사칙연산 %s %s %s %f\n", getName(), id, val1, op, val2, result);
+			
 			// 응답
 			ackObj.put("cmd", "ARITH");
 			ackObj.put("ack", Double.toString(result));
@@ -192,6 +219,8 @@ class WorkerThread extends Thread {
 		else if(cmd.equals("ALLCHAT")) {
 			String id = packetObj.getString("id");
 			String msg = packetObj.getString("msg");
+			
+			System.out.printf("<서버-%s> Id=%s 전체 채팅 %s\n", getName(), id, msg);
 			
 			/* 클라이언트 응답 패킷 */
 			// 응답
@@ -220,6 +249,8 @@ class WorkerThread extends Thread {
 			String yourid = packetObj.getString("yourid");
 			String msg = packetObj.getString("msg");
 			
+			System.out.printf("<서버-%s> 1:1 채팅 %s->%s : %s\n", getName(), id, yourid, msg);
+			
 			/* 클라이언트 응답 패킷 */
 			// 응답
 			ackObj.put("cmd", "ONECHAT");
@@ -240,7 +271,49 @@ class WorkerThread extends Thread {
 			String strUni = uniObj.toString();
 			// yourid 클라이언트한테 전송
 			unicast(strUni, yourid);
-		}		
+		}else if(cmd.equals("REQIDLIST")) {
+			String id = packetObj.getString("id");
+			
+			System.out.printf("<서버-%s> Id=%s 접속 ID 요청 \n", getName(), id);
+			
+			/* 클라이언트 응답 패킷 */
+			// 응답
+			ackObj.put("cmd", "REQIDLIST");
+			
+			// id를 JSON의 배열로 넣기 위한 선언
+			JSONArray idList = new JSONArray();
+			// id를 JSON배열에 넣기
+			Set<String> idSet = ht.keySet();
+			Iterator<String> idIter = idSet.iterator();
+			while(idIter.hasNext()) {
+				String _id = idIter.next();
+				idList.put(_id);
+			}
+			ackObj.put("list", idList);
+			// Json Obj -> 문자열
+			String ack = ackObj.toString();
+			// 클라이언트한테 전송
+			OutputStream out = this.socket.getOutputStream();
+			PrintWriter pw = new PrintWriter(new OutputStreamWriter(out));
+			pw.println(ack);
+			pw.flush();
+		}else if(cmd.equals("QUIT")) {
+			String id = packetObj.getString("id");
+			
+			System.out.printf("<서버-%s> Id=%s QUIT 요청 \n", getName(), id);
+			
+			// 관리에서 제외
+			ht.remove(id);
+			
+			ackObj.put("cmd", "QUIT");
+			ackObj.put("id", id);
+			String ack = ackObj.toString();
+			// 클라이언트한테 전송
+			OutputStream out = this.socket.getOutputStream();
+			PrintWriter pw = new PrintWriter(new OutputStreamWriter(out));
+			pw.println(ack);
+			pw.flush();
+		}
 	}
 	
 	// yourId에 해당하는 접속자를 찾아서 패킷을 전송
