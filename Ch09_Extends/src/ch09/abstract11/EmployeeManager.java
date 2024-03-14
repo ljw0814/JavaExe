@@ -9,6 +9,7 @@ public class EmployeeManager {
 	private int numOfEmp = 0;	// 저장된 사원객체 수, 다음 사원이 저장될 index
 	private Scanner sc = new Scanner(System.in);
 	
+	
 	private int viewMenu() {
 		System.out.println("[ 사원 선택 ]");
 		System.out.println("1. 정규직");
